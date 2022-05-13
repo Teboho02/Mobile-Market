@@ -40,6 +40,8 @@ public class MainActivity extends AppCompatActivity {
                             if (password.getText().toString().equals(everyone.get(i + 1))) ;
                             {
                                 Toast.makeText(MainActivity.this, "succedded login in", Toast.LENGTH_SHORT).show();
+                                Intent DoPost = new Intent(MainActivity.this, PostActivity.class);
+                                startActivity(DoPost);
                             }
 
                         }

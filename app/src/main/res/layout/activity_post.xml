@@ -1,0 +1,100 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:background="@drawable/light"
+    tools:context=".PostActivity">
+
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="200dp"
+        >
+
+
+        <ImageView
+            android:id="@+id/img"
+            android:layout_width="150dp"
+            android:layout_height="150dp"
+            android:layout_marginLeft="10dp"
+            android:src="@drawable/ic_baseline_add_a_photo_24"
+            android:layout_marginTop="30dp" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="20dp"
+            android:id="@+id/txt"
+            android:layout_marginTop="30dp"
+
+            android:layout_toRightOf="@id/img"
+            android:text="Name" />
+
+        <EditText
+            android:id="@+id/edtName"
+            android:layout_width="match_parent"
+            android:drawablePadding="20dp"
+            android:layout_height="50dp"
+            android:layout_below="@id/txt"
+            android:layout_marginStart="20dp"
+            android:layout_marginLeft="20dp"
+            android:layout_marginTop="10dp"
+            android:layout_marginEnd="10dp"
+            android:layout_marginRight="20dp"
+            android:layout_marginBottom="10dp"
+            android:layout_toRightOf="@id/img"
+            android:background="@drawable/custom_lay" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Price"
+            android:layout_below="@id/edtName"
+            android:layout_toRightOf="@id/img"
+            android:layout_marginLeft="20dp"
+            android:id="@+id/price"
+            />
+
+        <EditText
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:layout_below="@id/price"
+            android:layout_marginLeft="20dp"
+            android:layout_marginRight="10dp"
+            android:layout_toRightOf="@id/img"
+            android:drawablePadding="20dp"
+            android:background="@drawable/custom_lay" />
+
+
+
+
+    </RelativeLayout>
+
+    <EditText
+        android:layout_width="match_parent"
+        android:layout_marginRight="20dp"
+        android:lines="7"
+        android:layout_marginLeft="20dp"
+        android:layout_height="wrap_content"
+        android:background="@drawable/custom_lay"
+        android:hint="Description"
+
+        />
+
+    <Button
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:layout_marginLeft="20dp"
+        android:layout_marginRight="20dp"
+        android:text="Upload"
+        android:id="@+id/btnUpload"
+        />
+
+
+
+
+
+</LinearLayout>
