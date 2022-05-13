@@ -32,22 +32,28 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 CreateAccoutdatabase x = new CreateAccoutdatabase(MainActivity.this,"name",null,1);
-                ArrayList<String> everyone = x.getinfo();
-                Toast.makeText(MainActivity.this, " "+everyone, Toast.LENGTH_LONG).show();
-                for(int i = 0; i < everyone.size();i++) {
-                    try {
-                        if (email.getText().toString().equals(everyone.get(i))) {
-                            if (password.getText().toString().equals(everyone.get(i + 1))) ;
-                            {
-                                Toast.makeText(MainActivity.this, "succedded login in", Toast.LENGTH_SHORT).show();
-                                Intent DoPost = new Intent(MainActivity.this, PostActivity.class);
-                                startActivity(DoPost);
-                            }
 
+                ArrayList<String> everyone = null;
+             //   everyone = x.getinfo();
+                Toast.makeText(MainActivity.this, " "+everyone, Toast.LENGTH_LONG).show();
+                try {
+                    for (int i = 0; i < everyone.size(); i++) {
+                        try {
+                            if (email.getText().toString().equals(everyone.get(i))) {
+                                if (password.getText().toString().equals(everyone.get(i + 1))) ;
+                                {
+                                    Toast.makeText(MainActivity.this, "succedded login in", Toast.LENGTH_SHORT).show();
+                                    Intent DoPost = new Intent(MainActivity.this, PostActivity.class);
+                                    startActivity(DoPost);
+                                }
+
+                            }
+                        } catch (Exception e) {
+                            //do noti
                         }
-                    }catch (Exception e){
-                        //do noti
                     }
+                }catch(Exception e){
+
                 }
 
             }

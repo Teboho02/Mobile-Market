@@ -34,4 +34,6 @@ public class CreaateAcc {
     public void setPassword(String password) {
         this.password = password;
     }
+    //TODO verify format of input
+    //
 }
