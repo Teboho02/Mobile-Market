@@ -7,6 +7,10 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.Toast;
+
+import java.util.ArrayList;
+import java.util.List;
 
 public class MainActivity extends AppCompatActivity {
     Button Login;
@@ -27,6 +31,22 @@ public class MainActivity extends AppCompatActivity {
         Login.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                CreateAccoutdatabase x = new CreateAccoutdatabase(MainActivity.this,"name",null,1);
+                ArrayList<String> everyone = x.getinfo();
+                Toast.makeText(MainActivity.this, " "+everyone, Toast.LENGTH_LONG).show();
+                for(int i = 0; i < everyone.size();i++) {
+                    try {
+                        if (email.getText().toString().equals(everyone.get(i))) {
+                            if (password.getText().toString().equals(everyone.get(i + 1))) ;
+                            {
+                                Toast.makeText(MainActivity.this, "succedded login in", Toast.LENGTH_SHORT).show();
+                            }
+
+                        }
+                    }catch (Exception e){
+                        //do noti
+                    }
+                }
 
             }
         });
