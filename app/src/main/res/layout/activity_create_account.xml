@@ -1,0 +1,133 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:orientation="vertical"
+    android:layout_height="match_parent"
+    android:background="@drawable/light"
+    tools:context=".CreateAccountActivity">
+
+
+
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Name"
+        android:textSize="20dp"
+        android:layout_marginTop="100dp"
+        android:layout_marginLeft="15dp"
+
+        />
+
+    <EditText
+        android:layout_width="match_parent"
+        android:layout_height="60dp"
+        android:hint="Name"
+        android:background="@drawable/custom_lay"
+        android:drawablePadding="20dp"
+        android:inputType="textEmailAddress"
+        android:textSize="15sp"
+        android:layout_marginLeft="10dp"
+        android:layout_marginTop="3dp"
+        android:drawableStart="@drawable/ic_baseline_person_24"
+        android:id="@+id/CAedtName"
+
+        />
+
+
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Email"
+        android:textSize="20sp"
+        android:layout_marginTop="20dp"
+        android:layout_marginLeft="15dp"
+
+        />
+
+    <EditText
+        android:layout_width="match_parent"
+        android:layout_height="60dp"
+        android:hint="Email"
+        android:background="@drawable/custom_lay"
+        android:drawablePadding="20dp"
+        android:id="@+id/CAedtEmail"
+        android:inputType="textEmailAddress"
+        android:textSize="15sp"
+        android:layout_marginLeft="10dp"
+        android:layout_marginTop="3dp"
+        android:drawableStart="@drawable/ic_baseline_email_24"
+
+
+        />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Password"
+        android:textSize="20dp"
+        android:layout_marginTop="30dp"
+        android:layout_marginLeft="15dp"
+        />
+
+
+    <EditText
+        android:layout_width="match_parent"
+        android:layout_height="60dp"
+        android:id="@+id/CAedtPassword"
+        android:hint="Pick a password"
+        android:drawablePadding="20dp"
+        android:inputType="textPassword"
+        android:textSize="15dp"
+        android:background="@drawable/custom_lay"
+        android:drawableStart="@drawable/ic_baseline_lock_24"
+        android:layout_marginLeft="10dp"
+        android:layout_marginTop="3dp"
+
+
+        />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Confirm password"
+        android:textSize="20dp"
+        android:layout_marginTop="30dp"
+        android:layout_marginLeft="15dp"
+        />
+
+
+    <EditText
+        android:layout_width="match_parent"
+        android:layout_height="60dp"
+        android:id="@+id/CAconPassword"
+        android:hint="Confirm picked pasword"
+        android:drawablePadding="20dp"
+        android:inputType="textPassword"
+        android:textSize="15dp"
+        android:background="@drawable/custom_lay"
+        android:drawableStart="@drawable/ic_baseline_lock_24"
+        android:layout_marginLeft="10dp"
+        android:layout_marginTop="3dp"
+
+
+        />
+
+    <Button
+        android:layout_width="match_parent"
+        android:layout_height="60dp"
+        android:layout_marginRight="10dp"
+        android:layout_marginLeft="10dp"
+        android:text="Create Account"
+        android:layout_marginTop="20dp"
+        android:id="@+id/CAcreateAccount"
+        android:backgroundTint="@color/black"
+        />
+
+
+
+
+</LinearLayout>

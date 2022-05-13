@@ -1,0 +1,113 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:orientation="vertical"
+    android:background="@drawable/light"
+    android:layout_margin="0dp"
+    android:layout_height="match_parent"
+    tools:context=".MainActivity">
+
+
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textAlignment="center"
+        android:textSize="30sp"
+        android:text="Sign in"
+
+
+
+        />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Email"
+        android:textSize="20dp"
+        android:layout_marginTop="100dp"
+        android:layout_marginLeft="15dp"
+        />
+
+    <EditText
+        android:layout_width="match_parent"
+        android:layout_height="60dp"
+        android:hint="Email"
+        android:background="@drawable/custom_lay"
+        android:drawablePadding="20dp"
+        android:id="@+id/edtEmail"
+        android:inputType="textEmailAddress"
+        android:textSize="15sp"
+        android:layout_marginLeft="10dp"
+        android:layout_marginTop="3dp"
+        android:drawableStart="@drawable/ic_baseline_email_24"
+
+
+        />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Password"
+        android:textSize="20sp"
+        android:layout_marginTop="30dp"
+        android:layout_marginLeft="15dp"
+        />
+
+
+    <EditText
+        android:layout_width="match_parent"
+        android:layout_height="60dp"
+        android:id="@+id/edtPassword"
+        android:hint="Password"
+        android:drawablePadding="20dp"
+        android:inputType="textPassword"
+        android:textSize="15sp"
+        android:background="@drawable/custom_lay"
+        android:drawableStart="@drawable/ic_baseline_lock_24"
+        android:layout_marginLeft="10dp"
+        android:layout_marginTop="3dp"
+
+
+        />
+
+    <Button
+        android:layout_width="match_parent"
+        android:layout_height="60dp"
+        android:backgroundTint="@color/black"
+        android:id="@+id/btnLogin"
+        android:layout_marginLeft="10dp"
+        android:layout_marginRight="10dp"
+        android:text="Log in" />
+
+
+
+  <TextView
+      android:layout_width="match_parent"
+      android:layout_marginTop="30dp"
+      android:textSize="15sp"
+      android:layout_height="wrap_content"
+      android:textAlignment="center"
+
+      android:text="Don't have an account yet?"
+      android:id="@+id/txtacc"
+
+      />
+    <Button
+        android:layout_width="match_parent"
+        android:layout_height="60dp"
+        android:text="Create account"
+        android:id="@+id/btnCreateAccount"
+        android:backgroundTint="@color/black"
+        android:layout_marginLeft="10dp"
+        android:layout_marginRight="10dp"
+
+        />
+
+
+
+
+
+</LinearLayout>
