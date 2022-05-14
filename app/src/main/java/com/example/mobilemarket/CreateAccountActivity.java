@@ -21,7 +21,7 @@ public class CreateAccountActivity extends AppCompatActivity {
         CAemail = (EditText)findViewById(R.id.CAedtEmail);
         CApassword = (EditText)findViewById(R.id.CAedtPassword);
 
-
+        CAname.setText(postRequest.pos("https://lamp.ms.wits.ac.za/mc/test.php",this));
 
 
 
@@ -32,8 +32,10 @@ public class CreateAccountActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 CreaateAcc creaateAcc = null;
-                Intent intent = new Intent(CreateAccountActivity.this, HomeAct.class);
-                startActivity(intent);
+                Intent i = new Intent(CreateAccountActivity.this, PostActivity.class);
+                startActivity(i);
+             //   Intent intent = new Intent(CreateAccountActivity.this, HomeAct.class);
+               // startActivity(intent);
 //                try {
 //                    creaateAcc = new CreaateAcc(CAname.getText().toString(),CAemail.getText().toString(),CApassword.getText().toString());
 //                }

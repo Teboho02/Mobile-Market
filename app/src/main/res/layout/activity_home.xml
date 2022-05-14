@@ -7,14 +7,55 @@
     tools:context=".HomeAct">
 
 
-    <ListView
-        android:layout_width="0dp"
-        android:layout_height="0dp"
+    <LinearLayout
         android:id="@+id/listV"
+        android:layout_width="match_parent"
+        android:layout_height="70dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="1.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="parent"
+        android:orientation="horizontal"
+        app:layout_constraintVertical_bias="0.0" >
+
+      <ImageView
+          android:layout_width="70dp"
+          android:layout_height="70dp"
+          android:src="@drawable/home"
+          android:id="@+id/iconHome"
+          android:layout_marginLeft="20dp"
+          />
+
+        <ImageView
+            android:layout_width="70dp"
+            android:layout_height="70dp"
+            android:src="@drawable/search"
+            android:id="@+id/iconSearch"
+            android:layout_marginLeft="30dp"/>
+
+        <ImageView
+            android:layout_width="70dp"
+            android:layout_height="70dp"
+            android:src="@drawable/upload"
+            android:id="@+id/iconUpload"
+            android:layout_marginLeft="30dp"
+            />
+
+
+
+        <ImageView
+            android:layout_width="70dp"
+            android:layout_height="70dp"
+            android:layout_marginLeft="20dp"
+            android:src="@drawable/sync"
+            />
+
+
+
+
+    </LinearLayout>
+
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

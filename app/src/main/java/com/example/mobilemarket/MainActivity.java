@@ -9,6 +9,10 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -26,6 +30,8 @@ public class MainActivity extends AppCompatActivity {
         CreateAccout = (Button) findViewById(R.id.btnCreateAccount);
         Login = (Button)findViewById(R.id.btnLogin);
 
+        //use picasso to get pictures
+        //Picasso.get().load("http://i.imgur.com/DvpvklR.png").into(imageView)
 
         //todo
         Login.setOnClickListener(new View.OnClickListener() {
@@ -34,6 +40,8 @@ public class MainActivity extends AppCompatActivity {
                 CreateAccoutdatabase x = new CreateAccoutdatabase(MainActivity.this,"name",null,1);
 
                 ArrayList<String> everyone = null;
+                Intent home = new Intent(MainActivity.this, HomeAct.class);
+                startActivity(home);
              //   everyone = x.getinfo();
                 Toast.makeText(MainActivity.this, " "+everyone, Toast.LENGTH_LONG).show();
                 try {
@@ -72,6 +80,10 @@ public class MainActivity extends AppCompatActivity {
 
 
     }
+    public static void prosessJsonData(){
+
+    }
+
 
 
     //TODO
@@ -83,6 +95,15 @@ public class MainActivity extends AppCompatActivity {
             if(e.getText().toString().charAt(i)=='@'){
                 email = true;
             }
+        }
+
+    }
+
+    public static void ProcessJson(String json) throws JSONException {
+        JSONArray ja = new JSONArray(json);
+        for(int i = 0; i < json.length();i++){
+            JSONObject ob = ja.getJSONObject(i);
+       //     String result = ja.getString("EMAIL");
         }
 
     }
