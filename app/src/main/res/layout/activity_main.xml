@@ -21,13 +21,13 @@
         android:textSize="30sp" />
 
     <TextView
+        android:id="@+id/t"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Email"
-        android:textSize="20dp"
-        android:layout_marginTop="100dp"
         android:layout_marginLeft="15dp"
-        />
+        android:layout_marginTop="100dp"
+        android:text="Email"
+        android:textSize="20dp" />
 
     <EditText
         android:layout_width="match_parent"

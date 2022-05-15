@@ -1,5 +1,6 @@
 package com.example.mobilemarket;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
@@ -7,19 +8,30 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
+
+import okhttp3.Call;
+import okhttp3.Callback;
+import okhttp3.OkHttpClient;
+import okhttp3.Request;
+import okhttp3.Response;
+
 
 public class MainActivity extends AppCompatActivity {
     Button Login;
     Button CreateAccout;
     EditText email,password;
+    TextView t;
+    String f;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -29,7 +41,7 @@ public class MainActivity extends AppCompatActivity {
         password = (EditText)findViewById(R.id.edtPassword);
         CreateAccout = (Button) findViewById(R.id.btnCreateAccount);
         Login = (Button)findViewById(R.id.btnLogin);
-
+        t = (TextView)findViewById(R.id.t);
         //use picasso to get pictures
         //Picasso.get().load("http://i.imgur.com/DvpvklR.png").into(imageView)
 
@@ -37,37 +49,45 @@ public class MainActivity extends AppCompatActivity {
         Login.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                CreateAccoutdatabase x = new CreateAccoutdatabase(MainActivity.this,"name",null,1);
 
-                ArrayList<String> everyone = null;
-                Intent home = new Intent(MainActivity.this, HomeAct.class);
-                startActivity(home);
-             //   everyone = x.getinfo();
-                Toast.makeText(MainActivity.this, " "+everyone, Toast.LENGTH_LONG).show();
+               // postRequest R = new postRequest();
+                String s = doreQuest("https://lamp.ms.wits.ac.za/~s2446577/u.php?EMAIL="+email.getText().toString());
+                System.out.println(f);
                 try {
-                    for (int i = 0; i < everyone.size(); i++) {
-                        try {
-                            if (email.getText().toString().equals(everyone.get(i))) {
-                                if (password.getText().toString().equals(everyone.get(i + 1))) ;
-                                {
-                                    Toast.makeText(MainActivity.this, "succedded login in", Toast.LENGTH_SHORT).show();
-                                    Intent DoPost = new Intent(MainActivity.this, PostActivity.class);
-                                    startActivity(DoPost);
-                                }
-
-                            }
-                        } catch (Exception e) {
-                            //do noti
-                        }
+                    if(ProcessJson(t.getText().toString()).equals(password.getText().toString())){
+                        Intent home = new Intent(MainActivity.this, Choice.class);
+                        startActivity(home);
                     }
-                }catch(Exception e){
-
+                } catch (Exception e) {
+                    Toast.makeText(MainActivity.this, ""+e, Toast.LENGTH_SHORT).show();
                 }
+                
+             //   everyone = x.getinfo();
+//                Toast.makeText(MainActivity.this, " "+everyone, Toast.LENGTH_LONG).show();
+//                try {
+//                    for (int i = 0; i < everyone.size(); i++) {
+//                        try {
+//                            if (email.getText().toString().equals(everyone.get(i))) {
+//                                if (password.getText().toString().equals(everyone.get(i + 1))) ;
+//                                {
+//                                    Toast.makeText(MainActivity.this, "succedded login in", Toast.LENGTH_SHORT).show();
+//                                    Intent DoPost = new Intent(MainActivity.this, PostActivity.class);
+//                                    startActivity(DoPost);
+//                                }
+//
+//                            }
+//                        } catch (Exception e) {
+//                            //do noti
+//                        }
+//                    }
+//                }catch(Exception e){
+//
+//                }
 
             }
         });
 
-
+        //goes to CreateAccount Activity
         CreateAccout.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -80,9 +100,7 @@ public class MainActivity extends AppCompatActivity {
 
 
     }
-    public static void prosessJsonData(){
 
-    }
 
 
 
@@ -99,12 +117,58 @@ public class MainActivity extends AppCompatActivity {
 
     }
 
-    public static void ProcessJson(String json) throws JSONException {
+    //Converts Json type data into easily readable
+    public String ProcessJson(String json) throws JSONException {
         JSONArray ja = new JSONArray(json);
-        for(int i = 0; i < json.length();i++){
-            JSONObject ob = ja.getJSONObject(i);
-       //     String result = ja.getString("EMAIL");
-        }
+        String result = null;
+            for(int i = 0; i < ja.length();i++){
+                JSONObject ob = ja.getJSONObject(i);
+                result = ob.getString("password");
 
+                System.out.println(result);
+                return result;
+               // t.setText(result);
+            //    Toast.makeText(this, ""+result, Toast.LENGTH_LONG).show();
+            }
+
+    return result;
+
+    }
+
+    public String doreQuest(String url){
+        final String[] ret = new String[1];
+
+        OkHttpClient client = new OkHttpClient();
+
+        Request request = new Request.Builder()
+                .url(url)
+                .build();
+
+        client.newCall(request).enqueue(new Callback() {
+            @Override
+            public void onFailure(@NonNull Call call, @NonNull IOException e) {
+
+            }
+
+            @Override
+            public void onResponse(Call call, final Response response) throws IOException {
+                // ... check for failure using `isSuccessful` before proceeding
+
+                // Read data on the worker thread
+                final String responseData = response.body().string();
+
+                // Run view-related code back on the main thread
+                MainActivity.this.runOnUiThread(new Runnable() {
+                    @Override
+                    public void run() {
+                      //  ret[0] = responseData;
+                        f = responseData;
+                        t.setText(responseData);
+                        f = t.getText().toString();
+                    }
+                });
+            }
+        });
+        return f;
     }
 }

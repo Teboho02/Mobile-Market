@@ -15,7 +15,7 @@ import okhttp3.Request;
 import okhttp3.Response;
 
 public class postRequest {
-
+    static String ret;
     public static String pos(String link, Activity a){
         final String[] response_cl = {null};
         OkHttpClient client = new OkHttpClient();
@@ -36,19 +36,22 @@ public class postRequest {
 
                 // Read data on the worker thread
                 final String responseData = response.body().string();
+                //return responseData;
                 response_cl[0] = responseData;
 
                 // Run view-related code back on the main thread
                 a.runOnUiThread(new Runnable() {
                     @Override
                     public void run() {
-                        Toast.makeText(a, responseData, Toast.LENGTH_SHORT).show();
+                    //    Toast.makeText(a, response_cl[0], Toast.LENGTH_SHORT).show();
+                        ret = response_cl[0];
+
                     }
                 });
             }
         });
 
-        return response_cl[0];
+        return ret;
     }
 
 }
