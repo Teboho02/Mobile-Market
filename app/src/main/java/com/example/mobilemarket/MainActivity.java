@@ -3,6 +3,7 @@ package com.example.mobilemarket;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.ContentValues;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
@@ -45,13 +46,43 @@ public class MainActivity extends AppCompatActivity {
         //use picasso to get pictures
         //Picasso.get().load("http://i.imgur.com/DvpvklR.png").into(imageView)
 
+        ContentValues params = new ContentValues();
+//        params.put("", "");
+//        AsyncHttpPost asyncHttpPost = new AsyncHttpPost("http://lamp.ms.wits.ac.za/~s2446577/CARS.php",params) {
+//            @Override
+//            protected void onPostExecute(String output) {
+//                t.setText(output);
+//            }
+//        };
+//        asyncHttpPost.execute();
+
         //todo
         Login.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
 
                // postRequest R = new postRequest();
-                String s = doreQuest("https://lamp.ms.wits.ac.za/~s2446577/u.php?EMAIL="+email.getText().toString());
+//                params.put("", "");
+//                AsyncHttpPost asyncHttpPost = new AsyncHttpPost("https://lamp.ms.wits.ac.za/~s2446577/user.php?EMAIL="+email.getText().toString(),params) {
+//                    @Override
+//                    protected void onPostExecute(String output) {
+//                        String s = output;
+//                    }
+//                };
+//                asyncHttpPost.execute();
+                String s = doreQuest("https://lamp.ms.wits.ac.za/~s2446577/user.php?EMAIL="+email.getText().toString());
+                System.out.println(f);
+                try {
+                    if(ProcessJson(t.getText().toString()).equals(password.getText().toString())) {
+
+
+                        Intent home = new Intent(MainActivity.this, Choice.class);
+                        startActivity(home);}
+
+                } catch (Exception e) {
+                    Toast.makeText(MainActivity.this, ""+e, Toast.LENGTH_LONG).show();
+                }
+
                 System.out.println(f);
                 try {
                     if(ProcessJson(t.getText().toString()).equals(password.getText().toString())){
@@ -59,9 +90,10 @@ public class MainActivity extends AppCompatActivity {
                         startActivity(home);
                     }
                 } catch (Exception e) {
-                    Toast.makeText(MainActivity.this, ""+e, Toast.LENGTH_SHORT).show();
+                    Toast.makeText(MainActivity.this, ""+e, Toast.LENGTH_LONG).show();
                 }
-                
+
+
              //   everyone = x.getinfo();
 //                Toast.makeText(MainActivity.this, " "+everyone, Toast.LENGTH_LONG).show();
 //                try {
@@ -119,19 +151,22 @@ public class MainActivity extends AppCompatActivity {
 
     //Converts Json type data into easily readable
     public String ProcessJson(String json) throws JSONException {
-        JSONArray ja = new JSONArray(json);
-        String result = null;
-            for(int i = 0; i < ja.length();i++){
-                JSONObject ob = ja.getJSONObject(i);
-                result = ob.getString("password");
+        String password = null;
+        JSONArray Jarray = new JSONArray(json);
 
-                System.out.println(result);
-                return result;
-               // t.setText(result);
-            //    Toast.makeText(this, ""+result, Toast.LENGTH_LONG).show();
+        for(int i = 0;i < Jarray.length();i++){
+            try{
+                JSONObject oneObject = Jarray.getJSONObject(i);
+                // Pulling items from the array
+                String oneObjectsItem = oneObject.getString("EMAIL");
+                password = oneObject.getString("password");
+            }catch (Exception e){
+                    e.printStackTrace();
             }
+        }
 
-    return result;
+        Toast.makeText(this, ""+password, Toast.LENGTH_SHORT).show();
+        return password;
 
     }
 
@@ -163,7 +198,6 @@ public class MainActivity extends AppCompatActivity {
                     public void run() {
                       //  ret[0] = responseData;
                         f = responseData;
-                        t.setText(responseData);
                         f = t.getText().toString();
                     }
                 });
