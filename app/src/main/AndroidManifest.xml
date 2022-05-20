@@ -18,6 +18,9 @@
         android:theme="@style/Theme.MobileMarket"
         tools:targetApi="31">
         <activity
+            android:name=".SearchForItem"
+            android:exported="false" />
+        <activity
             android:name=".Choice"
             android:exported="false" />
         <activity

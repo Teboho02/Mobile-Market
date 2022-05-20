@@ -10,15 +10,25 @@ import java.io.IOException;
 
 import okhttp3.Call;
 import okhttp3.Callback;
+import okhttp3.HttpUrl;
 import okhttp3.OkHttpClient;
 import okhttp3.Request;
 import okhttp3.Response;
 
 public class postRequest {
     static String ret;
-    public static String pos(String link, Activity a){
+    public static String pos(String link, Activity a,String param1,String param1Value){
         final String[] response_cl = {null};
         OkHttpClient client = new OkHttpClient();
+
+        HttpUrl.Builder urlBuilder = HttpUrl.parse(link).newBuilder();
+        urlBuilder.addQueryParameter(param1, param1Value);
+  //      urlBuilder.addQueryParameter("q", "android");
+   //     urlBuilder.addQueryParameter("rsz", "8");
+        String url = urlBuilder.build().toString();
+
+
+
 
         Request request = new Request.Builder()
                 .url(link)

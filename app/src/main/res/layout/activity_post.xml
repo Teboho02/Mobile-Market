@@ -36,7 +36,6 @@
         <EditText
             android:id="@+id/edtName"
             android:layout_width="match_parent"
-            android:drawablePadding="20dp"
             android:layout_height="50dp"
             android:layout_below="@id/txt"
             android:layout_marginStart="20dp"
@@ -46,7 +45,8 @@
             android:layout_marginRight="20dp"
             android:layout_marginBottom="10dp"
             android:layout_toRightOf="@id/img"
-            android:background="@drawable/custom_lay" />
+            android:background="@drawable/custom_lay"
+            android:drawablePadding="20dp" />
 
         <TextView
             android:layout_width="wrap_content"
@@ -65,8 +65,8 @@
             android:layout_marginLeft="20dp"
             android:layout_marginRight="10dp"
             android:layout_toRightOf="@id/img"
-            android:drawablePadding="20dp"
-            android:background="@drawable/custom_lay" />
+            android:background="@drawable/custom_lay"
+            android:drawablePadding="20dp" />
 
 
 

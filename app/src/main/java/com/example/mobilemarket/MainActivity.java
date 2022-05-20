@@ -22,6 +22,7 @@ import java.util.List;
 
 import okhttp3.Call;
 import okhttp3.Callback;
+import okhttp3.HttpUrl;
 import okhttp3.OkHttpClient;
 import okhttp3.Request;
 import okhttp3.Response;
@@ -46,75 +47,69 @@ public class MainActivity extends AppCompatActivity {
         //use picasso to get pictures
         //Picasso.get().load("http://i.imgur.com/DvpvklR.png").into(imageView)
 
-        ContentValues params = new ContentValues();
-//        params.put("", "");
-//        AsyncHttpPost asyncHttpPost = new AsyncHttpPost("http://lamp.ms.wits.ac.za/~s2446577/CARS.php",params) {
-//            @Override
-//            protected void onPostExecute(String output) {
-//                t.setText(output);
-//            }
-//        };
-//        asyncHttpPost.execute();
 
         //todo
         Login.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
 
-               // postRequest R = new postRequest();
-//                params.put("", "");
-//                AsyncHttpPost asyncHttpPost = new AsyncHttpPost("https://lamp.ms.wits.ac.za/~s2446577/user.php?EMAIL="+email.getText().toString(),params) {
-//                    @Override
-//                    protected void onPostExecute(String output) {
-//                        String s = output;
-//                    }
-//                };
-//                asyncHttpPost.execute();
-                String s = doreQuest("https://lamp.ms.wits.ac.za/~s2446577/user.php?EMAIL="+email.getText().toString());
-                System.out.println(f);
-                try {
-                    if(ProcessJson(t.getText().toString()).equals(password.getText().toString())) {
 
 
-                        Intent home = new Intent(MainActivity.this, Choice.class);
-                        startActivity(home);}
+        //nake sure the fields are not empty
+            String link = "https://lamp.ms.wits.ac.za/~s2446577/test2.php";
 
-                } catch (Exception e) {
-                    Toast.makeText(MainActivity.this, ""+e, Toast.LENGTH_LONG).show();
-                }
+                OkHttpClient client = new OkHttpClient();
+                HttpUrl.Builder urlBuilder = HttpUrl.parse(link).newBuilder();
+                urlBuilder.addQueryParameter("username", email.getText().toString());
+               // urlBuilder.addQueryParameter("name", "z");
+                urlBuilder.addQueryParameter("rsz", "8");
+                String url = urlBuilder.build().toString();
 
-                System.out.println(f);
-                try {
-                    if(ProcessJson(t.getText().toString()).equals(password.getText().toString())){
-                        Intent home = new Intent(MainActivity.this, Choice.class);
-                        startActivity(home);
+                Request request = new Request.Builder()
+                        .url(url)
+                        .build();
+
+
+
+                client.newCall(request).enqueue(new Callback() {
+                    @Override
+                    public void onFailure(@NonNull Call call, @NonNull IOException e) {
+
                     }
-                } catch (Exception e) {
-                    Toast.makeText(MainActivity.this, ""+e, Toast.LENGTH_LONG).show();
-                }
+
+                    @Override
+                    public void onResponse(Call call, final Response response) throws IOException {
+                        // ... check for failure using `isSuccessful` before proceeding
+
+                        // Read data on the worker thread
+                        final String responseData = response.body().string();
+
+                        // Run view-related code back on the main thread
+                        MainActivity.this.runOnUiThread(new Runnable() {
+                            @Override
+                            public void run() {
+                           //     Toast.makeText(MainActivity.this, ""+responseData, Toast.LENGTH_SHORT).show();
+                                try {
+                                    ProcessJson(responseData);
+                                    Toast.makeText(MainActivity.this, ""+f, Toast.LENGTH_SHORT).show();
+                                    if(f.equals(password.getText().toString())){
+                                        Intent x = new Intent(MainActivity.this, Choice.class);
+                                        startActivity(x);
+                                    }
+                                    else{
+                                        Toast.makeText(MainActivity.this, "Wrong password", Toast.LENGTH_SHORT).show();
+                                    }
+                                } catch (JSONException e) {
+                                    e.printStackTrace();
+                                }
+                            }
+                        });
+                    }
+                });
 
 
-             //   everyone = x.getinfo();
-//                Toast.makeText(MainActivity.this, " "+everyone, Toast.LENGTH_LONG).show();
-//                try {
-//                    for (int i = 0; i < everyone.size(); i++) {
-//                        try {
-//                            if (email.getText().toString().equals(everyone.get(i))) {
-//                                if (password.getText().toString().equals(everyone.get(i + 1))) ;
-//                                {
-//                                    Toast.makeText(MainActivity.this, "succedded login in", Toast.LENGTH_SHORT).show();
-//                                    Intent DoPost = new Intent(MainActivity.this, PostActivity.class);
-//                                    startActivity(DoPost);
-//                                }
-//
-//                            }
-//                        } catch (Exception e) {
-//                            //do noti
-//                        }
-//                    }
-//                }catch(Exception e){
-//
-//                }
+
+
 
             }
         });
@@ -150,59 +145,16 @@ public class MainActivity extends AppCompatActivity {
     }
 
     //Converts Json type data into easily readable
-    public String ProcessJson(String json) throws JSONException {
-        String password = null;
-        JSONArray Jarray = new JSONArray(json);
-
-        for(int i = 0;i < Jarray.length();i++){
-            try{
-                JSONObject oneObject = Jarray.getJSONObject(i);
-                // Pulling items from the array
-                String oneObjectsItem = oneObject.getString("EMAIL");
-                password = oneObject.getString("password");
-            }catch (Exception e){
-                    e.printStackTrace();
-            }
+    public void ProcessJson(String json) throws JSONException {
+        JSONArray ja = new JSONArray(json);
+        for(int i = 0; i < ja.length();i++){
+            JSONObject jo = ja.getJSONObject(i);
+            String result = jo.getString("password");
+            f = result;
+           // Toast.makeText(this, ""+result, Toast.LENGTH_SHORT).show();
         }
 
-        Toast.makeText(this, ""+password, Toast.LENGTH_SHORT).show();
-        return password;
-
     }
 
-    public String doreQuest(String url){
-        final String[] ret = new String[1];
 
-        OkHttpClient client = new OkHttpClient();
-
-        Request request = new Request.Builder()
-                .url(url)
-                .build();
-
-        client.newCall(request).enqueue(new Callback() {
-            @Override
-            public void onFailure(@NonNull Call call, @NonNull IOException e) {
-
-            }
-
-            @Override
-            public void onResponse(Call call, final Response response) throws IOException {
-                // ... check for failure using `isSuccessful` before proceeding
-
-                // Read data on the worker thread
-                final String responseData = response.body().string();
-
-                // Run view-related code back on the main thread
-                MainActivity.this.runOnUiThread(new Runnable() {
-                    @Override
-                    public void run() {
-                      //  ret[0] = responseData;
-                        f = responseData;
-                        f = t.getText().toString();
-                    }
-                });
-            }
-        });
-        return f;
-    }
 }
