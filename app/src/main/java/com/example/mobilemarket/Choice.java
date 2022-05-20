@@ -34,7 +34,8 @@ public class Choice extends AppCompatActivity {
         search.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-
+                Intent i = new Intent(Choice.this,SearchForItem.class);
+                startActivity(i);
             }
         });
 

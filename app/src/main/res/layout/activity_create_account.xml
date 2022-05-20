@@ -48,6 +48,8 @@
 
         />
 
+
+
     <EditText
         android:layout_width="match_parent"
         android:layout_height="60dp"
@@ -62,7 +64,10 @@
         android:drawableStart="@drawable/ic_baseline_email_24"
 
 
+
+
         />
+
 
     <TextView
         android:layout_width="wrap_content"
@@ -121,11 +126,13 @@
         android:layout_height="60dp"
         android:layout_marginRight="10dp"
         android:layout_marginLeft="10dp"
+        android:textColor="@color/white"
         android:text="Create Account"
         android:layout_marginTop="20dp"
         android:id="@+id/CAcreateAccount"
         android:backgroundTint="@color/black"
         />
+
 
 
 

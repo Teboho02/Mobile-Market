@@ -20,8 +20,8 @@
             android:layout_width="150dp"
             android:layout_height="150dp"
             android:layout_marginLeft="10dp"
-            android:src="@drawable/ic_baseline_add_a_photo_24"
-            android:layout_marginTop="30dp" />
+            android:layout_marginTop="30dp"
+            android:src="@drawable/ic_baseline_add_a_photo_24" />
 
         <TextView
             android:layout_width="wrap_content"
@@ -34,9 +34,8 @@
             android:text="Name" />
 
         <EditText
-            android:id="@+id/edtName"
+            android:id="@+id/product_name"
             android:layout_width="match_parent"
-            android:drawablePadding="20dp"
             android:layout_height="50dp"
             android:layout_below="@id/txt"
             android:layout_marginStart="20dp"
@@ -46,27 +45,29 @@
             android:layout_marginRight="20dp"
             android:layout_marginBottom="10dp"
             android:layout_toRightOf="@id/img"
-            android:background="@drawable/custom_lay" />
+            android:background="@drawable/custom_lay"
+            android:drawablePadding="20dp" />
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Price"
-            android:layout_below="@id/edtName"
+            android:layout_below="@id/product_name"
             android:layout_toRightOf="@id/img"
             android:layout_marginLeft="20dp"
-            android:id="@+id/price"
+            android:id="@+id/product_price"
             />
 
         <EditText
             android:layout_width="match_parent"
             android:layout_height="50dp"
-            android:layout_below="@id/price"
+            android:id="@+id/product_Price"
+            android:layout_below="@id/product_price"
             android:layout_marginLeft="20dp"
             android:layout_marginRight="10dp"
             android:layout_toRightOf="@id/img"
-            android:drawablePadding="20dp"
-            android:background="@drawable/custom_lay" />
+            android:background="@drawable/custom_lay"
+            android:drawablePadding="20dp" />
 
 
 
@@ -76,7 +77,8 @@
     <EditText
         android:layout_width="match_parent"
         android:layout_marginRight="20dp"
-        android:lines="7"
+        android:id="@+id/product_description"
+        android:lines="10"
         android:layout_marginLeft="20dp"
         android:layout_height="wrap_content"
         android:background="@drawable/custom_lay"
@@ -91,7 +93,11 @@
         android:layout_marginRight="20dp"
         android:text="Upload"
         android:id="@+id/btnUpload"
+        android:backgroundTint="@color/black"
+        android:textColor="@color/white"
         />
+
+
 
 
 
