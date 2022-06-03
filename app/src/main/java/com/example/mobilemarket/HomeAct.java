@@ -27,7 +27,7 @@ public class HomeAct extends AppCompatActivity {
             "","New PlayStaion 5","Blue 5mm pen","2020 M1 MAX macbook air","big dog","2002 Audi A4 with 80 miles . Still looks and works like a new car" +
             "","New PlayStaion 5","Blue 5mm pen","2020 M1 MAX macbook air","big dog","2002 Audi A4 with 80 miles . Still looks and works like a new car" +
             "","New PlayStaion 5","Blue 5mm pen","2020 M1 MAX macbook air","big dog"};
-    String[] url = {"https://lamp.ms.wits.ac.za/~s2446577/image/car.jpg","https://lamp.ms.wits.ac.za/~s2446577/image/ps5.png",
+    static String[] url = {"https://lamp.ms.wits.ac.za/~s2446577/image/car.jpg","https://lamp.ms.wits.ac.za/~s2446577/image/ps5.png",
     "https://lamp.ms.wits.ac.za/~s2446577/image/pen.jpg","https://lamp.ms.wits.ac.za/~s2446577/image/macbook.jpeg","" +
             "https://lamp.ms.wits.ac.za/~s2446577/image/dog.jpg","https://lamp.ms.wits.ac.za/~s2446577/image/car.jpg","https://lamp.ms.wits.ac.za/~s2446577/image/ps5.png",
             "https://lamp.ms.wits.ac.za/~s2446577/image/pen.jpg","https://lamp.ms.wits.ac.za/~s2446577/image/macbook.jpeg","" +
@@ -40,32 +40,36 @@ public class HomeAct extends AppCompatActivity {
     String[] price = {"R200 000","R7000","R5","R25000","R700","R200 000","R7000","R5","R25000","R700","R200 000","R7000","R5","R25000","R700","R200 000","R7000","R5","R25000","R700"};
     ImageView upload;
     ImageView v;
+    int index = -1;
     ListView listView;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_home);
-        try {
-            Thread.sleep(600);
-        } catch (InterruptedException e) {
-            e.printStackTrace();
-        }
+
         listView = (ListView)findViewById(R.id.ListVi);
        v = (ImageView) findViewById(R.id.imagePosted);
         CustomBaseAdapter customBaseAdapter =  new CustomBaseAdapter(getApplicationContext(),name,desc,price,url);
         listView.setAdapter(customBaseAdapter);
 
-//        upload = (ImageView) findViewById(R.id.iconUpload);
-//
-//        upload.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View view) {
-//                Intent i = new Intent(HomeAct.this, PostActivity.class);
-//                startActivity(i);
-//            }
-//        });
+        listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
+                    index = i;
+                    Intent x =new Intent(HomeAct.this, ViewSingleItem.class);
+                    x.putExtra("key",i);
+                    startActivity(x);
+
+            }
+        });
 
 
     }
+
+    public static int getData(){
+        //get data from serves and database
+        return -1;
+    }
+
 
 }

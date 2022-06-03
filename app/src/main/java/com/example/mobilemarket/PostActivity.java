@@ -5,6 +5,7 @@ import androidx.annotation.Nullable;
 import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.app.Activity;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
@@ -70,10 +71,16 @@ public class PostActivity extends AppCompatActivity {
             @RequiresApi(api = Build.VERSION_CODES.O)
             @Override
             public void onClick(View view) {
-                String link = "https://lamp.ms.wits.ac.za/~s2446577/insertImage.php";
+                String link = "https://lamp.ms.wits.ac.za/~s2446577/insertToItemsUploaded.php";
+
                 OkHttpClient client = new OkHttpClient();
                 HttpUrl.Builder urlBuilder = HttpUrl.parse(link).newBuilder();
-                urlBuilder.addQueryParameter("im", imageToString(img));
+                urlBuilder.addQueryParameter("username", "Teboho");
+                urlBuilder.addQueryParameter("Price", product_price.getText().toString());
+                urlBuilder.addQueryParameter("DESCRIPTION", product_desciption.getText().toString());
+                urlBuilder.addQueryParameter("Date", "2008-7-04");
+             //   urlBuilder.addQueryParameter("pic", imageToString(img));
+
                 String url = urlBuilder.build().toString();
 
                 Request request = new Request.Builder()
@@ -97,7 +104,7 @@ public class PostActivity extends AppCompatActivity {
                         PostActivity.this.runOnUiThread(new Runnable() {
                             @Override
                             public void run() {
-
+                                Toast.makeText(PostActivity.this, ""+responseData, Toast.LENGTH_LONG).show();
                             }
                         });
                     }
@@ -125,24 +132,11 @@ public class PostActivity extends AppCompatActivity {
 
                 image.setImageBitmap(bitmap);
             }catch (Exception e){
-                //
+
             }
         }
     }
 
-    public static ArrayList<String> return_data(){
-        ArrayList<String> s = new ArrayList<>();
-        s.add(name);
-        s.add(price);
-        s.add(desc);
-        s.add(date);
-
-        //todo
-        //Upload to the database
-
-
-        return s;
-    }
 
     private String imageToString(Bitmap bitmap){
         ByteArrayOutputStream byteArrayOutputStream = new ByteArrayOutputStream();
@@ -156,5 +150,7 @@ public class PostActivity extends AppCompatActivity {
         byte[] imageAsBytes = Base64.decode(b64.getBytes(), Base64.DEFAULT);
         return BitmapFactory.decodeByteArray(imageAsBytes, 0, imageAsBytes.length);
     }
+
+
 
 }

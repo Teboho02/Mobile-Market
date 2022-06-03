@@ -4,11 +4,13 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.app.AppCompatDelegate;
 
+import android.content.ContentValues;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.os.Bundle;
 import android.util.Base64;
 import android.widget.ImageView;
+import android.widget.Toast;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -31,58 +33,23 @@ public class preview extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO);
         setContentView(R.layout.activity_preview);
-        testImage = (ImageView) findViewById(R.id.testImage);
-
-
-
-        String link = "https://lamp.ms.wits.ac.za/~s2446577/insertImage.php";
-        OkHttpClient client = new OkHttpClient();
-        HttpUrl.Builder urlBuilder = HttpUrl.parse(link).newBuilder();
-       // urlBuilder.addQueryParameter("im", imageToString(img));
-        String url = urlBuilder.build().toString();
-
-        Request request = new Request.Builder()
-                .url(url)
-                .build();
-
-        client.newCall(request).enqueue(new Callback() {
+        //testImage = (ImageView) findViewById(R.id.testImage);
+        Toast.makeText(this, "in preview", Toast.LENGTH_SHORT).show();
+        String link = "https://lamp.ms.wits.ac.za/~s2446577/cars.php";
+        ContentValues params = new ContentValues();
+        params.put("username","tebza");
+        AsyncHttpPost asyncHttpPost = new AsyncHttpPost(link,params) {
             @Override
-            public void onFailure(@NonNull Call call, @NonNull IOException e) {
-
+            protected void onPostExecute(String output) {
+                Toast.makeText(preview.this, ""+output, Toast.LENGTH_LONG).show();
             }
+        };
 
-            @Override
-            public void onResponse(Call call, final Response response) throws IOException {
-                // ... check for failure using `isSuccessful` before proceeding
 
-                // Read data on the worker thread
-                final String responseData = response.body().string();
 
-                // Run view-related code back on the main thread
-                preview.this.runOnUiThread(new Runnable() {
-                    @Override
-                    public void run() {
 
-                    }
-                });
-            }
-        });
 
-    }
 
-    private Bitmap convertBase64ToBitmap(String b64) {
-        byte[] imageAsBytes = Base64.decode(b64.getBytes(), Base64.DEFAULT);
-        return BitmapFactory.decodeByteArray(imageAsBytes, 0, imageAsBytes.length);
-    }
-
-    public void ProcessJson(String json) throws JSONException {
-        JSONArray ja = new JSONArray(json);
-        for(int i = 0; i < ja.length();i++){
-            JSONObject jo = ja.getJSONObject(i);
-            String result = jo.getString("password");
-            f = result;
-            // Toast.makeText(this, ""+result, Toast.LENGTH_SHORT).show();
-        }
 
     }
 
