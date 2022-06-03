@@ -51,22 +51,23 @@ public class MainActivity extends AppCompatActivity {
         Login = (Button)findViewById(R.id.btnLogin);
         t = (TextView)findViewById(R.id.t);
         //use picasso to get pictures
-        //Picasso.get().load("http://i.imgur.com/DvpvklR.png").into(imageView)
+        //icasso.get().load("http://i.imgur.com/DvpvklR.png").into(imageView)
 
 
         //todo
+
+
         Login.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
 
-            Intent intent = new Intent(MainActivity.this, Choice.class);
-            //startActivity(intent);
-                String link = "https://lamp.ms.wits.ac.za/~s2446577/cars.php";
-                Toast.makeText(MainActivity.this, "this runs", Toast.LENGTH_SHORT).show();
+            //Intent intent = new Intent(MainActivity.this, Choice.class);
+           // startActivity(intent);
+                String link = "https://lamp.ms.wits.ac.za/~s2446577/userdetails.php";
 
                 OkHttpClient client = new OkHttpClient();
                 HttpUrl.Builder urlBuilder = HttpUrl.parse(link).newBuilder();
-                urlBuilder.addQueryParameter("username", "root");
+                urlBuilder.addQueryParameter("username", email.getText().toString());
 
                 String url = urlBuilder.build().toString();
 
@@ -93,10 +94,22 @@ public class MainActivity extends AppCompatActivity {
                             @Override
                             public void run() {
                                try {
-                                   if(ProcessJson(responseData)==password.getText().toString()){
-                                       Intent i = new Intent(MainActivity.this,Choice.class);
-                                       startActivity(i);
+                                 //  Toast.makeText(MainActivity.this, ""+responseData, Toast.LENGTH_SHORT).show();
+                                   if(!email.getText().toString().isEmpty()&&!password.getText().toString().isEmpty()) {
+                                       if (ProcessJson(responseData).equals(password.getText().toString())) {
+                                           Intent i = new Intent(MainActivity.this, Choice.class);
+
+
+                                           i.putExtra("key",email.getText().toString());
+                                           startActivity(i);
+                                       } else {
+                                          // Toast.makeText(MainActivity.this, "Incorrect Password", Toast.LENGTH_SHORT).show();
+                                           password.setText("");
+                                       }
+                                   }else{
+                                       //Toast.makeText(MainActivity.this, "Please enter username and password", Toast.LENGTH_SHORT).show();
                                    }
+
                                } catch (JSONException e) {
                                    e.printStackTrace();
                                }
@@ -145,10 +158,10 @@ public class MainActivity extends AppCompatActivity {
             JSONObject jo = ja.getJSONObject(i);
             String result = jo.getString("password");
             f = result;
-        //    Toast.makeText(this, ""+result, Toast.LENGTH_SHORT).show();
+          // Toast.makeText(this, ""+result, Toast.LENGTH_SHORT).show();
             requested = result;
         }
-
+      //  Toast.makeText(this, ""+requested, Toast.LENGTH_SHORT).show();
         return requested;
 
     }

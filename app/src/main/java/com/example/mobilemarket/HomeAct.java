@@ -40,32 +40,35 @@ public class HomeAct extends AppCompatActivity {
     String[] price = {"R200 000","R7000","R5","R25000","R700","R200 000","R7000","R5","R25000","R700","R200 000","R7000","R5","R25000","R700","R200 000","R7000","R5","R25000","R700"};
     ImageView upload;
     ImageView v;
+    int index = -1;
     ListView listView;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_home);
-        try {
-            Thread.sleep(600);
-        } catch (InterruptedException e) {
-            e.printStackTrace();
-        }
+
         listView = (ListView)findViewById(R.id.ListVi);
        v = (ImageView) findViewById(R.id.imagePosted);
         CustomBaseAdapter customBaseAdapter =  new CustomBaseAdapter(getApplicationContext(),name,desc,price,url);
         listView.setAdapter(customBaseAdapter);
 
-//        upload = (ImageView) findViewById(R.id.iconUpload);
-//
-//        upload.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View view) {
-//                Intent i = new Intent(HomeAct.this, PostActivity.class);
-//                startActivity(i);
-//            }
-//        });
+        listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
+                    index = i;
+                    Intent x =new Intent(HomeAct.this, ViewSingleItem.class);
+                    startActivity(x);
+
+            }
+        });
 
 
     }
+
+    public static int getData(){
+        //get data from serves and database
+        return -1;
+    }
+
 
 }

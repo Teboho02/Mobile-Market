@@ -5,23 +5,54 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
+    android:background="@drawable/light"
     tools:context=".SearchForItem">
 
-
-    <EditText
+    <LinearLayout
+        android:layout_marginTop="20dp"
         android:layout_width="match_parent"
-        android:layout_height="50dp"
-        android:background="@drawable/custom_lay"
-        />
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        >
 
-   <Button
-       android:layout_width="match_parent"
-       android:layout_height="wrap_content"
-       android:text="Search"
-       android:id="@+id/btnSea"
-       android:background="@drawable/custom_lay"
-       android:backgroundTint="@color/white"
-       />
+        <EditText
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:background="@drawable/custom_lay"
+            android:drawableStart="@drawable/search"
+            android:layout_marginLeft="10dp"
+            android:layout_marginRight="10dp"
+            />
+
+        <Button
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:text="Search"
+            android:id="@+id/btnSea"
+            android:backgroundTint="@color/black"
+            android:textColor="@color/white"
+            android:layout_marginLeft="10dp"
+            android:layout_marginRight="10dp"
+            android:layout_marginTop="10dp"
+
+            />
+
+        <ListView
+            android:id="@+id/ListView"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginBottom="4dp"
+
+            >
+
+
+        </ListView>
+
+    </LinearLayout>
+
+
+
+
 
 
 
