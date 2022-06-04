@@ -40,6 +40,7 @@ public class MainActivity extends AppCompatActivity {
     TextView t;
     String f;
     static String user;
+    static String li = "https://lamp.ms.wits.ac.za/~s2446577/cars2.php";
     @Override
     protected void onCreate(Bundle savedInstanceState) {
 
@@ -54,6 +55,7 @@ public class MainActivity extends AppCompatActivity {
         //use picasso to get pictures
         //icasso.get().load("http://i.imgur.com/DvpvklR.png").into(imageView)
 
+        String link= "https://lamp.ms.wits.ac.za/~s2446577/userdetails.php";
 
         //todo
 
@@ -62,8 +64,8 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
 
-            //Intent intent = new Intent(MainActivity.this, Choice.class);
-           // startActivity(intent);
+                //Intent intent = new Intent(MainActivity.this, Choice.class);
+                // startActivity(intent);
                 String link = "https://lamp.ms.wits.ac.za/~s2446577/userdetails.php";
 
                 OkHttpClient client = new OkHttpClient();
@@ -94,26 +96,27 @@ public class MainActivity extends AppCompatActivity {
                         MainActivity.this.runOnUiThread(new Runnable() {
                             @Override
                             public void run() {
-                               try {
-                                 //  Toast.makeText(MainActivity.this, ""+responseData, Toast.LENGTH_SHORT).show();
-                                   if(!email.getText().toString().isEmpty()&&!password.getText().toString().isEmpty()) {
-                                       if (ProcessJson(responseData).equals(password.getText().toString())) {
-                                           Intent i = new Intent(MainActivity.this, Choice.class);
+                                try {
+                                    //  Toast.makeText(MainActivity.this, ""+responseData, Toast.LENGTH_SHORT).show();
+                                    if(!email.getText().toString().isEmpty()&&!password.getText().toString().isEmpty()) {
+                                        if (ProcessJson(responseData).equals(password.getText().toString())) {
+                                            Intent i = new Intent(MainActivity.this, Choice.class);
+
 
                                             user = email.getText().toString();
-                                           i.putExtra("key",email.getText().toString());
-                                           startActivity(i);
-                                       } else {
-                                          // Toast.makeText(MainActivity.this, "Incorrect Password", Toast.LENGTH_SHORT).show();
-                                           password.setText("");
-                                       }
-                                   }else{
-                                       //Toast.makeText(MainActivity.this, "Please enter username and password", Toast.LENGTH_SHORT).show();
-                                   }
+                                            i.putExtra("key",email.getText().toString());
+                                            startActivity(i);
+                                        } else {
+                                            // Toast.makeText(MainActivity.this, "Incorrect Password", Toast.LENGTH_SHORT).show();
+                                            password.setText("");
+                                        }
+                                    }else{
+                                        //Toast.makeText(MainActivity.this, "Please enter username and password", Toast.LENGTH_SHORT).show();
+                                    }
 
-                               } catch (JSONException e) {
-                                   e.printStackTrace();
-                               }
+                                } catch (JSONException e) {
+                                    e.printStackTrace();
+                                }
                             }
                         });
                     }
@@ -123,6 +126,10 @@ public class MainActivity extends AppCompatActivity {
 
             }
         });
+
+
+
+
 
         //goes to CreateAccount Activity
         CreateAccout.setOnClickListener(new View.OnClickListener() {
@@ -164,6 +171,84 @@ public class MainActivity extends AppCompatActivity {
         }
       //  Toast.makeText(this, ""+requested, Toast.LENGTH_SHORT).show();
         return requested;
+
+    }
+
+    public static void donothing(){
+
+
+        /*
+
+        Login.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
+            //Intent intent = new Intent(MainActivity.this, Choice.class);
+           // startActivity(intent);
+                String link = "https://lamp.ms.wits.ac.za/~s2446577/userdetails.php";
+
+                OkHttpClient client = new OkHttpClient();
+                HttpUrl.Builder urlBuilder = HttpUrl.parse(link).newBuilder();
+                urlBuilder.addQueryParameter("username", email.getText().toString());
+
+                String url = urlBuilder.build().toString();
+
+                Request request = new Request.Builder()
+                        .url(url)
+                        .build();
+
+                client.newCall(request).enqueue(new Callback() {
+                    @Override
+                    public void onFailure(Call call, IOException e) {
+                        //Toast.makeText(MainActivity.this, ""+e, Toast.LENGTH_SHORT).show();
+                        System.out.println(e);
+                    }
+
+                    @Override
+                    public void onResponse(Call call, final Response response) throws IOException {
+                        // ... check for failure using `isSuccessful` before proceeding
+
+                        // Read data on the worker thread
+                        final String responseData = response.body().string();
+
+                        // Run view-related code back on the main thread
+                        MainActivity.this.runOnUiThread(new Runnable() {
+                            @Override
+                            public void run() {
+                               try {
+                                 //  Toast.makeText(MainActivity.this, ""+responseData, Toast.LENGTH_SHORT).show();
+                                   if(!email.getText().toString().isEmpty()&&!password.getText().toString().isEmpty()) {
+                                       if (ProcessJson(responseData).equals(password.getText().toString())) {
+                                           Intent i = new Intent(MainActivity.this, preview.class);
+
+
+                                            user = email.getText().toString();
+                                           i.putExtra("key",email.getText().toString());
+                                           startActivity(i);
+                                       } else {
+                                          // Toast.makeText(MainActivity.this, "Incorrect Password", Toast.LENGTH_SHORT).show();
+                                           password.setText("");
+                                       }
+                                   }else{
+                                       //Toast.makeText(MainActivity.this, "Please enter username and password", Toast.LENGTH_SHORT).show();
+                                   }
+
+                               } catch (JSONException e) {
+                                   e.printStackTrace();
+                               }
+                            }
+                        });
+                    }
+                });
+
+
+
+            }
+        });
+
+
+         */
+
 
     }
 

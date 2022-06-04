@@ -54,7 +54,6 @@ public class ViewSingleItem extends AppCompatActivity {
 
 
         //
-     String[] x = HomeAct.url;
 
 
         HttpUrl.Builder urlBuilder = HttpUrl.parse(link).newBuilder();

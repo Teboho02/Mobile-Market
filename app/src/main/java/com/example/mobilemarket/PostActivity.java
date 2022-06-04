@@ -20,6 +20,8 @@ import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.Toast;
 
+import org.json.JSONException;
+
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 import java.lang.reflect.Array;
@@ -30,9 +32,11 @@ import java.util.ArrayList;
 
 import okhttp3.Call;
 import okhttp3.Callback;
+import okhttp3.FormBody;
 import okhttp3.HttpUrl;
 import okhttp3.OkHttpClient;
 import okhttp3.Request;
+import okhttp3.RequestBody;
 import okhttp3.Response;
 
 public class PostActivity extends AppCompatActivity {
@@ -41,6 +45,7 @@ public class PostActivity extends AppCompatActivity {
     Uri imageuri;
     EditText product_name, product_price, product_desciption;
     static Bitmap img;
+    static String Simage;
     Button upload;
     private static int PICK_IMAGE = 1;
     @Override
@@ -71,44 +76,17 @@ public class PostActivity extends AppCompatActivity {
             @RequiresApi(api = Build.VERSION_CODES.O)
             @Override
             public void onClick(View view) {
+
+
+
+
                 String link = "https://lamp.ms.wits.ac.za/~s2446577/insertToItemsUploaded.php";
 
-                OkHttpClient client = new OkHttpClient();
-                HttpUrl.Builder urlBuilder = HttpUrl.parse(link).newBuilder();
-                urlBuilder.addQueryParameter("username", "Teboho");
-                urlBuilder.addQueryParameter("Price", product_price.getText().toString());
-                urlBuilder.addQueryParameter("DESCRIPTION", product_desciption.getText().toString());
-                urlBuilder.addQueryParameter("Date", "2008-7-04");
-             //   urlBuilder.addQueryParameter("pic", imageToString(img));
+                uploadImage uploadimage = new uploadImage();
+                uploadimage.upload(Simage,PostActivity.this,MainActivity.user,product_price.getText().toString(),
+                        "2008-11-11",product_desciption.getText().toString(),link);
 
-                String url = urlBuilder.build().toString();
 
-                Request request = new Request.Builder()
-                        .url(url)
-                        .build();
-
-                client.newCall(request).enqueue(new Callback() {
-                    @Override
-                    public void onFailure(@NonNull Call call, @NonNull IOException e) {
-
-                    }
-
-                    @Override
-                    public void onResponse(Call call, final Response response) throws IOException {
-                        // ... check for failure using `isSuccessful` before proceeding
-
-                        // Read data on the worker thread
-                        final String responseData = response.body().string();
-
-                        // Run view-related code back on the main thread
-                        PostActivity.this.runOnUiThread(new Runnable() {
-                            @Override
-                            public void run() {
-                                Toast.makeText(PostActivity.this, ""+responseData, Toast.LENGTH_LONG).show();
-                            }
-                        });
-                    }
-                });
             }
         });
 
@@ -128,6 +106,8 @@ public class PostActivity extends AppCompatActivity {
             try{
                 Bitmap bitmap = MediaStore.Images.Media.getBitmap(getContentResolver(),imageuri);
                 img = bitmap;
+                Simage = imageToString(bitmap);
+
 
 
                 image.setImageBitmap(bitmap);

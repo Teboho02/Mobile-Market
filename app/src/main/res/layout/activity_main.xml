@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:orientation="vertical"
-    android:background="@drawable/spots"
+    android:background="@drawable/wall"
     android:layout_margin="0dp"
     android:layout_height="match_parent"
     tools:context=".MainActivity">
@@ -15,6 +15,7 @@
         android:layout_height="wrap_content"
         android:fontFamily="sans-serif-black"
         android:text="Sign in"
+        android:textColor="@color/black"
         android:textAlignment="center"
         android:textStyle="italic"
 
@@ -31,6 +32,7 @@
         android:src="@drawable/icons"
         app:civ_border_width="1dp"
         app:civ_border_color="#FF000000"/>
+
 
     <TextView
         android:id="@+id/t"
