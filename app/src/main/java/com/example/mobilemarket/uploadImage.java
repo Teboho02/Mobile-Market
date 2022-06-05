@@ -21,7 +21,7 @@ public class uploadImage {
 
     //String link = "https://lamp.ms.wits.ac.za/~s2446577/imageX.php";
 
-    public void upload(String Simage, Activity a,String username,String price,String date,String DESC,String link){
+    public void upload(String Simage, Activity a,String username,String price,String date,String DESC,String link,String itemname){
         OkHttpClient client = new OkHttpClient();
 
 
@@ -29,11 +29,12 @@ public class uploadImage {
 
 
         RequestBody formBody = new FormBody.Builder()
-                .add("username", "2")
+                .add("username", MainActivity.user)
                 .add("image",Simage)
                 .add("Price",price)
                 .add("Date",date)
-                .add("DESRIPTION",DESC)
+                .add("DESCRIPTION",DESC)
+                .add("itemname",itemname)
                 .build();
         Request request = new Request.Builder()
                 .url(link).post(formBody)

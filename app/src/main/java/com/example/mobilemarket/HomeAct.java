@@ -38,24 +38,24 @@ import okhttp3.Request;
 import okhttp3.Response;
 
 public class HomeAct extends AppCompatActivity {
-    String[] username = new String[100];
-    String[] desc = new String[100];
-    String[] url = new String[100];
-    String[] date = new String[100];
-    String[]  price = new String[100];
-    String[] image  = new String[100];
-    String[] averageRating = new String[100];
-    ArrayList<String>  Aurl, Aimage;
-    ArrayList<String> Ausername = new ArrayList<String>();
-    ArrayList<String> Aprice = new ArrayList<String>();
-    ArrayList<String> Adesc = new ArrayList<String>();
-    ArrayList<String> Adate = new ArrayList<String>();
-    ArrayList<String> base64 = new ArrayList<String>();
 
+    static ArrayList<String> Ausername = new ArrayList<String>();
+    static String[] username = new String[15];
+    static String[] desc  = new String[15];
+    static String[]  price = new String[15];
+    static String[] product_name  = new String[15];
+    static String[] averageRating  = new String[15];
+    static String[] DATE =  new String[15];
+    static ArrayList<String> Aprice = new ArrayList<String>();
+    static  ArrayList<String> Adesc = new ArrayList<String>();
+    static ArrayList<String> Adate = new ArrayList<String>();
+    static ArrayList<String> base64 = new ArrayList<String>();
+    static ArrayList<String> pname = new ArrayList<String>();
+    static int pos;
     ArrayList<String>  AverageRating = new ArrayList<String >();
     ImageView upload;
     ImageView v;
-    Bitmap[] bit= new Bitmap[100];
+    static Bitmap[] bit= new Bitmap[100];
     int index = -1;
     ListView listView;
     @Override
@@ -95,32 +95,34 @@ public class HomeAct extends AppCompatActivity {
                     @Override
                     public void run() {
                         //Toast.makeText(HomeAct.this, ""+responseData, Toast.LENGTH_SHORT).show();
-                        System.out.println(responseData);
+                        System.out.println("response data = "+responseData);
+
                         try {
-                            ProcessJson(responseData,"Price",Aprice);
-                            ProcessJson(responseData,"Date",Adate);
                             ProcessJson(responseData,"imagebase64",base64);
-                            ProcessJson(responseData,"DESCRIPTION",Adesc);
+                            ProcessJson(responseData,  "DESCRIPTION",Adesc);
+                            ProcessJson(responseData,"Price",Aprice);
                             ProcessJson(responseData,"username",Ausername);
+                            ProcessJson(responseData,"itemname",pname);
 
 
-                            price = convertToArray(Aprice);
-                            username = convertToArray(Ausername);
-                            desc = convertToArray(Adesc);
-                            image = convertToArray(base64);
-                            date = convertToArray(Adate);
-
-
-                            for(int i = 0; i < base64.size();i++){
-                                bit[i] = convertBase64ToBitmap(image[i]);
-                            }
-
-
-
-                            System.out.println("size = "+Aprice.size());
                         } catch (JSONException e) {
                             e.printStackTrace();
                         }
+
+
+
+
+
+                        for(int i =0 ; i < base64.size(); i++){
+                            bit[i] = convertBase64ToBitmap(base64.get(i));
+                            desc[i] = Adesc.get(i);
+                            price[i] = "price " +Aprice.get(i);
+                            username[i] = Ausername.get(i);
+                            product_name[i] = pname.get(i);
+
+
+                        }
+
 
                     }
                 });
@@ -133,6 +135,7 @@ public class HomeAct extends AppCompatActivity {
             @Override
             public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
                 index = i;
+                pos = i;
                 Intent x =new Intent(HomeAct.this, ViewSingleItem.class);
                 startActivity(x);
 
@@ -140,7 +143,9 @@ public class HomeAct extends AppCompatActivity {
         });
 
 
-        CustomBaseAdapter customBaseAdapter =  new CustomBaseAdapter(getApplicationContext(),username,desc,price,averageRating,bit);
+
+
+        CustomBaseAdapter customBaseAdapter =  new CustomBaseAdapter(getApplicationContext(),username,desc,price,averageRating,bit,product_name);
         listView.setAdapter(customBaseAdapter);
 
     }
@@ -174,6 +179,9 @@ public class HomeAct extends AppCompatActivity {
     }
 
 
+
+
+
     private Bitmap convertBase64ToBitmap(String b64) {
         byte[] imageAsBytes = Base64.decode(b64.getBytes(), Base64.DEFAULT);
         return BitmapFactory.decodeByteArray(imageAsBytes, 0, imageAsBytes.length);
@@ -185,6 +193,10 @@ public class HomeAct extends AppCompatActivity {
             x[i] = a.get(i);
         }
         return x;
+
+    }
+
+    public void check(){
 
     }
 

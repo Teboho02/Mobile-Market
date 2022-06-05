@@ -10,7 +10,7 @@ import android.widget.ImageView;
 import android.widget.Toast;
 
 public class Choice extends AppCompatActivity {
-    ImageView gotoHome, search,upload;
+    ImageView gotoHome, search,upload, profile;
     String value;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -31,6 +31,16 @@ public class Choice extends AppCompatActivity {
         gotoHome = (ImageView) findViewById(R.id.gotoHomeActivity);
         search = (ImageView)findViewById(R.id.imgSearch);
         upload = (ImageView)findViewById(R.id.imgUpload);
+        profile = (ImageView) findViewById(R.id.imageProfile);
+
+        profile.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent i = new Intent(Choice.this, Profile.class);
+                startActivity(i);
+
+            }
+        });
 
 
         gotoHome.setOnClickListener(new View.OnClickListener() {

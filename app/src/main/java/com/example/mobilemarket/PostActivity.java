@@ -84,7 +84,7 @@ public class PostActivity extends AppCompatActivity {
 
                 uploadImage uploadimage = new uploadImage();
                 uploadimage.upload(Simage,PostActivity.this,MainActivity.user,product_price.getText().toString(),
-                        "2008-11-11",product_desciption.getText().toString(),link);
+                        "2008-11-11",product_desciption.getText().toString(),link,product_name.getText().toString());
 
 
             }
