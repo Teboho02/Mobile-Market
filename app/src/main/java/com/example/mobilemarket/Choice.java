@@ -18,6 +18,7 @@ public class Choice extends AppCompatActivity {
         setContentView(R.layout.activity_choice);
         //
 
+
         //pass data between two activities
         Bundle extras = getIntent().getExtras();
         if (extras != null) {

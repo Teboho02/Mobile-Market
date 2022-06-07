@@ -39,13 +39,21 @@ public class MainActivity extends AppCompatActivity {
     EditText email,password;
     TextView t;
     String f;
+    static String pass;
     static String user;
     static String li = "https://lamp.ms.wits.ac.za/~s2446577/cars2.php";
     @Override
     protected void onCreate(Bundle savedInstanceState) {
 
         super.onCreate(savedInstanceState);
+        try {
+            Thread.sleep(1000);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+        setTheme(R.style.Theme_MobileMarket);
         setContentView(R.layout.activity_main);
+
 
         email = (EditText)findViewById(R.id.edtEmail);
         password = (EditText)findViewById(R.id.edtPassword);
@@ -99,22 +107,28 @@ public class MainActivity extends AppCompatActivity {
                                 try {
                                     //  Toast.makeText(MainActivity.this, ""+responseData, Toast.LENGTH_SHORT).show();
                                     if(!email.getText().toString().isEmpty()&&!password.getText().toString().isEmpty()) {
-                                        if (ProcessJson(responseData).equals(password.getText().toString())) {
-                                            Intent i = new Intent(MainActivity.this, Choice.class);
+                                        try{
+                                            if (ProcessJson(responseData).equals(password.getText().toString())) {
+                                                Intent i = new Intent(MainActivity.this, Choice.class);
 
+                                                pass = password.getText().toString();
+                                                user = email.getText().toString();
+                                                i.putExtra("key",email.getText().toString());
+                                                startActivity(i);
+                                            } else {
+                                                Toast.makeText(MainActivity.this, "Incorrect Password", Toast.LENGTH_SHORT).show();
+                                                password.setText("");
+                                        }
 
-                                            user = email.getText().toString();
-                                            i.putExtra("key",email.getText().toString());
-                                            startActivity(i);
-                                        } else {
-                                            // Toast.makeText(MainActivity.this, "Incorrect Password", Toast.LENGTH_SHORT).show();
-                                            password.setText("");
+                                        }catch (Exception e){
+                                            Toast.makeText(MainActivity.this, "Account does not exist", Toast.LENGTH_SHORT).show();
+                                            e.printStackTrace();
                                         }
                                     }else{
                                         //Toast.makeText(MainActivity.this, "Please enter username and password", Toast.LENGTH_SHORT).show();
                                     }
 
-                                } catch (JSONException e) {
+                                } catch (Exception e) {
                                     e.printStackTrace();
                                 }
                             }

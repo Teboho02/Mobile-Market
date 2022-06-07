@@ -37,6 +37,7 @@ public class ViewSingleItem extends AppCompatActivity {
     Button submit_rating;
     ImageView imageView;
     RatingBar ratingBar;
+    String itemId;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -57,6 +58,55 @@ public class ViewSingleItem extends AppCompatActivity {
 
 
 
+        OkHttpClient client = new OkHttpClient();
+
+        HttpUrl.Builder urlBuilder = HttpUrl.parse(link2).newBuilder();
+        urlBuilder.addQueryParameter("username", MainActivity.user);
+        urlBuilder.addQueryParameter("itemID", "android");
+        String url = urlBuilder.build().toString();
+
+        Request request = new Request.Builder()
+                .url(url)
+                .build();
+
+        client.newCall(request).enqueue(new Callback() {
+            @Override
+            public void onFailure(Call call, IOException e) {
+
+            }
+
+            @Override
+            public void onResponse(Call call, final Response response) throws IOException {
+                // ... check for failure using `isSuccessful` before proceeding
+
+                // Read data on the worker thread
+                final String responseData = response.body().string();
+
+                // Run view-related code back on the main thread
+                ViewSingleItem.this.runOnUiThread(new Runnable() {
+                    @Override
+                    public void run() {
+                        Toast.makeText(ViewSingleItem.this, "Rating submited "+responseData, Toast.LENGTH_SHORT).show();
+                    }
+                });
+            }
+        });
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
         ratingBar.setOnRatingBarChangeListener(new RatingBar.OnRatingBarChangeListener() {
@@ -66,40 +116,6 @@ public class ViewSingleItem extends AppCompatActivity {
                 Toast.makeText(ViewSingleItem.this, ""+v, Toast.LENGTH_SHORT).show();
                 Float ratingbar;
                // ratingBar.isClickable(False);
-                OkHttpClient client = new OkHttpClient();
-
-                HttpUrl.Builder urlBuilder = HttpUrl.parse(link2).newBuilder();
-                urlBuilder.addQueryParameter("username", MainActivity.user);
-                urlBuilder.addQueryParameter("itemID", "android");
-                urlBuilder.addQueryParameter("rating", String.valueOf(v));
-                String url = urlBuilder.build().toString();
-
-                Request request = new Request.Builder()
-                        .url(url)
-                        .build();
-
-                client.newCall(request).enqueue(new Callback() {
-                    @Override
-                    public void onFailure(Call call, IOException e) {
-
-                    }
-
-                    @Override
-                    public void onResponse(Call call, final Response response) throws IOException {
-                        // ... check for failure using `isSuccessful` before proceeding
-
-                        // Read data on the worker thread
-                        final String responseData = response.body().string();
-
-                        // Run view-related code back on the main thread
-                        ViewSingleItem.this.runOnUiThread(new Runnable() {
-                            @Override
-                            public void run() {
-                                Toast.makeText(ViewSingleItem.this, ""+responseData, Toast.LENGTH_SHORT).show();
-                            }
-                        });
-                    }
-                });
 
 
             }
@@ -111,7 +127,6 @@ public class ViewSingleItem extends AppCompatActivity {
         name.setText(HomeAct.username[pos]);
         desciptiom.setText(HomeAct.desc[pos]);
         price.setText(HomeAct.price[pos]);
-        int a = HomeAct.getData();
         imageView.setImageBitmap(bitmap);
 
      //   Picasso.get().load("https://lamp.ms.wits.ac.za/~s2446577/image/car.jpg").into(imageView);

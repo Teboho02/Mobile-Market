@@ -1,9 +1,6 @@
 package com.example.mobilemarket;
 
 import android.app.Activity;
-import android.widget.Toast;
-
-import org.json.JSONException;
 
 import java.io.IOException;
 
@@ -16,13 +13,15 @@ import okhttp3.Request;
 import okhttp3.RequestBody;
 import okhttp3.Response;
 
-public class uploadImage {
+public class makeRequest {
 
+    String lnk;
 
-    //String link = "https://lamp.ms.wits.ac.za/~s2446577/imageX.php";
-    String res;
-    public void upload(String Simage, Activity a,String username,String price,String date,String DESC,String link,String itemname){
+    public String getLnk() {
+        return lnk;
+    }
 
+    public void upload(Activity a, String link, String param1, String value1, String param2, String value2, String param3, String value3){
         OkHttpClient client = new OkHttpClient();
 
 
@@ -30,12 +29,9 @@ public class uploadImage {
 
 
         RequestBody formBody = new FormBody.Builder()
-                .add("username", MainActivity.user)
-                .add("image",Simage)
-                .add("Price",price)
-                .add("Date",date)
-                .add("DESCRIPTION",DESC)
-                .add("itemname",itemname)
+                .add(param1, value1)
+                .add(param2,value2)
+                .add(param3,value3)
                 .build();
         Request request = new Request.Builder()
                 .url(link).post(formBody)
@@ -59,8 +55,8 @@ public class uploadImage {
                 a.runOnUiThread(new Runnable() {
                     @Override
                     public void run() {
-                      System.out.println(responseData);
-                      res = responseData;
+                        System.out.println("responsedata = "+responseData);
+                        lnk = responseData;
                     }
                 });
             }
@@ -68,7 +64,12 @@ public class uploadImage {
 
 
 
+
+
     }
+
+
+
 
 
 }

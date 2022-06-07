@@ -59,9 +59,6 @@ public class PostActivity extends AppCompatActivity {
         product_desciption = (EditText) findViewById(R.id.product_description);
 
 
-
-
-
         image.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -85,6 +82,9 @@ public class PostActivity extends AppCompatActivity {
                 uploadImage uploadimage = new uploadImage();
                 uploadimage.upload(Simage,PostActivity.this,MainActivity.user,product_price.getText().toString(),
                         "2008-11-11",product_desciption.getText().toString(),link,product_name.getText().toString());
+
+
+
 
 
             }

@@ -18,6 +18,7 @@
         <EditText
             android:layout_width="match_parent"
             android:layout_height="50dp"
+            android:id="@+id/edtSearch"
             android:background="@drawable/custom_lay"
             android:drawableStart="@drawable/search"
             android:layout_marginLeft="10dp"

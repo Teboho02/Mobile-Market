@@ -37,13 +37,14 @@
         <Button
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:id="@+id/btnSsave"
             android:layout_gravity="end"
             android:layout_marginLeft="100dp"
             android:layout_marginTop="10dp"
             android:layout_marginRight="10dp"
             android:layout_weight="1"
-            android:background="@drawable/custom_lay"
             android:text="Save"
+            android:backgroundTint="@color/black"
 
             />
 
@@ -62,6 +63,8 @@
 
     <Button
         android:layout_width="match_parent"
+        android:layout_marginLeft="15dp"
+        android:layout_marginRight="15dp"
         android:layout_height="50dp"
         android:layout_marginTop="20dp"
         android:text="Change password"
@@ -74,6 +77,8 @@
         android:layout_width="match_parent"
         android:layout_height="50dp"
         android:hint="Old password"
+        android:layout_marginLeft="15dp"
+        android:layout_marginRight="15dp"
         android:id="@+id/edtOldpadd"
         android:visibility="invisible"
         android:background="@drawable/custom_lay"
@@ -82,7 +87,8 @@
         android:layout_width="match_parent"
         android:layout_height="50dp"
         android:hint="New password"
-
+        android:layout_marginLeft="15dp"
+        android:layout_marginRight="15dp"
         android:id="@+id/edtNewpass"
         android:background="@drawable/custom_lay"
         android:visibility="invisible"
@@ -91,6 +97,8 @@
         android:layout_width="match_parent"
         android:layout_height="50dp"
         android:text="update"
+        android:layout_marginLeft="15dp"
+        android:layout_marginRight="15dp"
         android:backgroundTint="@color/black"
         android:id="@+id/btnUpdate"
         android:visibility="invisible"
@@ -102,6 +110,8 @@
         android:layout_height="50dp"
         android:text="Update name"
         android:layout_marginTop="10dp"
+        android:layout_marginLeft="15dp"
+        android:layout_marginRight="15dp"
         android:backgroundTint="@color/black"
         android:id="@+id/btnUpdateName"
         />
@@ -111,7 +121,8 @@
         android:layout_height="50dp"
         android:hint="new Name"
         android:id="@+id/edtUpdateame"
-
+        android:layout_marginLeft="15dp"
+        android:layout_marginRight="15dp"
         android:background="@drawable/custom_lay"
         android:visibility="invisible"
 
@@ -120,9 +131,10 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="Update"
+        android:layout_marginLeft="15dp"
+        android:layout_marginRight="15dp"
         android:id="@+id/btnU"
         android:backgroundTint="@color/black"
-        android:background="@drawable/custom_lay"
         android:visibility="invisible"
         />
 
@@ -130,9 +142,10 @@
     <Button
         android:layout_width="match_parent"
         android:backgroundTint="@color/black"
-
+        android:layout_marginLeft="15dp"
+        android:layout_marginRight="15dp"
         android:layout_height="50dp"
-        android:id="@+id/btnUPDATE"
+        android:id="@+id/btnDeleteAccount"
         android:text="Delete Account"
         android:layout_marginTop="30dp"
 

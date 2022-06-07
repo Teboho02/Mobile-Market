@@ -43,6 +43,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Date : 20 April 20202"
+                android:id="@+id/da"
                 android:layout_marginLeft="20dp"
                 />
 
@@ -87,6 +88,7 @@
             android:id="@+id/HomeaverageRating"
             android:layout_marginLeft="30dp"
             android:layout_marginTop="10dp"
+
             />
 
 

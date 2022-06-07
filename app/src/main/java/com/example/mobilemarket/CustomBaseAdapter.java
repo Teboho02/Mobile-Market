@@ -22,10 +22,11 @@ public class CustomBaseAdapter extends BaseAdapter {
     String[] aveRating;
     Bitmap[] bit;
     String[] product_name;
+    String[] date;
     public CustomBaseAdapter() {
     }
 
-    public CustomBaseAdapter (Context context, String[] name, String[] description, String[] prize,String [] aveRating,Bitmap[] bit,String[] product_name){
+    public CustomBaseAdapter (Context context, String[] name, String[] description, String[] prize,String [] aveRating,Bitmap[] bit,String[] product_name,String[] date){
         this.con = context;
         layoutInflater = LayoutInflater.from(context);
         this.name = name;
@@ -34,7 +35,7 @@ public class CustomBaseAdapter extends BaseAdapter {
         this.product_name = product_name;
         this.aveRating = aveRating;
         this.bit = bit;
-
+        this.date = date;
     }
 
 
@@ -62,17 +63,20 @@ public class CustomBaseAdapter extends BaseAdapter {
             TextView price = (TextView) x.findViewById(R.id.homePrize);
             price.setText(prize[position]);
             TextView desc = (TextView) x.findViewById(R.id.HomeDescpription);
-            desc.setText(description[position]);
+           // desc.setText(description[position]);
+            desc.setText("");
             TextView aveRati = (TextView) x.findViewById(R.id.HomeaverageRating);
-            aveRati.setText("0");
+            aveRati.setText("No reviews yet");
             ImageView ima = (ImageView) x.findViewById(R.id.imagePosted);
             ima.setImageBitmap(bit[position]);
             TextView productname = x.findViewById(R.id.product_name);
             productname.setText(product_name[position]);
-
-
+            TextView da = x.findViewById(R.id.da);
+            da.setText(date[position]);
+  //          System.out.println("Happemed");
 
 
         return x;
     }
+
 }

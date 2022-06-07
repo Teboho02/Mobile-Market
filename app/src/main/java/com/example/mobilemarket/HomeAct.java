@@ -51,10 +51,10 @@ public class HomeAct extends AppCompatActivity {
     static ArrayList<String> Adate = new ArrayList<String>();
     static ArrayList<String> base64 = new ArrayList<String>();
     static ArrayList<String> pname = new ArrayList<String>();
+
     static int pos;
-    ArrayList<String>  AverageRating = new ArrayList<String >();
-    ImageView upload;
     ImageView v;
+    ImageView search;
     static Bitmap[] bit= new Bitmap[100];
     int index = -1;
     ListView listView;
@@ -65,6 +65,18 @@ public class HomeAct extends AppCompatActivity {
 
         listView = (ListView)findViewById(R.id.ListVi);
         v = (ImageView) findViewById(R.id.imagePosted);
+
+        search = findViewById(R.id.imgSearch);
+
+
+
+        search.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent i = new Intent(HomeAct.this, SearchForItem.class);
+                startActivity(i);
+            }
+        });
 
 
         String link = "https://lamp.ms.wits.ac.za/~s2446577/getData.php";
@@ -103,6 +115,7 @@ public class HomeAct extends AppCompatActivity {
                             ProcessJson(responseData,"Price",Aprice);
                             ProcessJson(responseData,"username",Ausername);
                             ProcessJson(responseData,"itemname",pname);
+                            ProcessJson(responseData,"date",Adate);
 
 
                         } catch (JSONException e) {
@@ -119,16 +132,57 @@ public class HomeAct extends AppCompatActivity {
                             price[i] = "price " +Aprice.get(i);
                             username[i] = Ausername.get(i);
                             product_name[i] = pname.get(i);
+                            DATE[i] = Adate.get(i);
+
+
 
 
                         }
+
+                        int lem = Adesc.size();
+                        Bitmap[] bit1 = new Bitmap[lem];
+                        String[] desc1 = new String[lem];
+                        String[] price1 = new String[lem];
+                        String[] username1 = new String[lem];
+                        String[] product_name1 = new String[lem];
+                        String[] DATE1 = new String[lem];
+
+                        for(int i = 0; i < lem; i++){
+                            bit1[i] = bit[i];
+                            desc1[i] = desc[i];
+                            price1[i] = price[i];
+                            username1[i] = username[i];
+                            product_name1[i] =product_name[i];
+                            DATE1[i] = DATE[i].trim();
+
+
+                        }
+
+
+
+
+                        Adesc.clear();
+                        Adate.clear();
+                        pname.clear();
+                        Ausername.clear();
+                        base64.clear();
+                        Aprice.clear();
+
+
+
+
+
+                        CustomBaseAdapter customBaseAdapter =  new CustomBaseAdapter(getApplicationContext(),username1,desc1,price1,averageRating,bit1,product_name1,DATE1);
+                        Toast.makeText(HomeAct.this, "happened", Toast.LENGTH_LONG).show();
+                        listView.setAdapter(customBaseAdapter);
+
+
 
 
                     }
                 });
             }
         });
-
 
 
         listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
@@ -145,17 +199,11 @@ public class HomeAct extends AppCompatActivity {
 
 
 
-        CustomBaseAdapter customBaseAdapter =  new CustomBaseAdapter(getApplicationContext(),username,desc,price,averageRating,bit,product_name);
-        listView.setAdapter(customBaseAdapter);
-
     }
 
 
 
 
-    public static int getData(){
-        return 1;
-    }
 
     public String ProcessJson(String json,String param, ArrayList<String> x) throws JSONException {
         String requested = null;
@@ -178,10 +226,6 @@ public class HomeAct extends AppCompatActivity {
 
     }
 
-
-
-
-
     private Bitmap convertBase64ToBitmap(String b64) {
         byte[] imageAsBytes = Base64.decode(b64.getBytes(), Base64.DEFAULT);
         return BitmapFactory.decodeByteArray(imageAsBytes, 0, imageAsBytes.length);
@@ -195,12 +239,4 @@ public class HomeAct extends AppCompatActivity {
         return x;
 
     }
-
-    public void check(){
-
-    }
-
-
-
-
 }

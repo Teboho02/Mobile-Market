@@ -56,7 +56,9 @@ public class CreateAccountActivity extends AppCompatActivity {
                if(CheckPassword(CApassword,CAconfrimPassword)){
 
 
-
+                    if(CApassword.getText().toString().length()<5){
+                        Toast.makeText(CreateAccountActivity.this, "", Toast.LENGTH_SHORT).show();
+                    }
                    addUser(CAname.getText().toString(),CAemail.getText().toString(),CApassword.getText().toString());
 
                }
